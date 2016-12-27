@@ -647,6 +647,7 @@ service gx_fpd /system/bin/gx_fpd
      group root system
      writepid /dev/cpuset/system-background/tasks
 
+<<<<<<< HEAD
 service ims_rtp_daemon /system/bin/ims_rtp_daemon
    class main
    user system
