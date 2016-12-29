@@ -183,6 +183,10 @@ on boot
     chown system system /sys/class/leds/green/led_time
     chown system system /sys/class/leds/blue/led_time
 
+    # Goodix FP
+    chown system system /dev/goodix_fp
+    chmod 0644 /dev/goodix_fp
+
 # msm specific files that need to be created on /data
 on post-fs-data
     # Create directory for TZ Apps
@@ -321,6 +325,7 @@ on post-fs-data
     # Fingerprint
     mkdir /data/fpc 0770 system system
     mkdir /data/fpc/s 0770 system system
+    mkdir /data/goodix 0770 system system
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -641,13 +646,15 @@ service fingerprintd /system/bin/fingerprintd
     socket fpce stream 0660 system system
     writepid /dev/cpuset/system-background/tasks
 
-service gx_fpd /system/bin/gx_fpd
+ service gx_fpd /system/bin/gx_fpd
      class late_start
-     user root
-     group root system
-     writepid /dev/cpuset/system-background/tasks
+     user system
+     group system
+     disabled
+ 
+ on property:persist.sys.fp.sensor=goodix
+     start gx_fpd
 
-<<<<<<< HEAD
 service ims_rtp_daemon /system/bin/ims_rtp_daemon
    class main
    user system

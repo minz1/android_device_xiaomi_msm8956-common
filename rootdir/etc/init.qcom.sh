@@ -116,3 +116,9 @@ if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_versio
     chown radio.radio /data/misc/radio/ver_info.txt
 fi
 echo 1 > /data/misc/radio/copy_complete
+
+if [ -d /sys/class/goodix_fp ]; then
+    setprop persist.sys.fp.sensor goodix
+else
+    setprop persist.sys.fp.sensor fpc
+fi
