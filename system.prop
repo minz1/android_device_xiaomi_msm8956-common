@@ -54,6 +54,9 @@ ro.opengles.version=196609
 ro.sf.lcd_density=420
 video.accelerate.hw=1
 
+# Google Pixel Assistance Support
+ro.opa.eligible_device=true
+
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 
